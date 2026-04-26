@@ -1,0 +1,1570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Real Stories, Real Change</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   CSS VARIABLES & RESET
+============================================================ */
+:root {
+  --peach:    #FFD6BA;
+  --lavender: #D6C6F5;
+  --mint:     #B8F0D6;
+  --blush:    #FFC5D9;
+  --sky:      #B8E4F9;
+  --butter:   #FFF3B0;
+  --lilac:    #E8D5F5;
+  --sage:     #C8E6C4;
+
+  --p1: #FF7F50;   /* coral  - Taking Initiative */
+  --p2: #9B59B6;   /* purple - Innovativeness */
+  --p3: #2ECC71;   /* green  - Perseverance */
+  --p4: #3498DB;   /* blue   - Conscientiousness */
+  --p5: #E74C3C;   /* red    - Problem Solving */
+
+  --dark: #1a1a2e;
+  --text: #2d2d44;
+  --muted: #7a7a99;
+
+  --r-sm: 12px;
+  --r-md: 20px;
+  --r-lg: 32px;
+  --r-xl: 48px;
+
+  --shadow: 0 8px 32px rgba(100,80,180,.12);
+  --shadow-hover: 0 16px 48px rgba(100,80,180,.22);
+
+  --font-head: 'Syne', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+  --font-hand: 'Caveat', cursive;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  color: var(--text);
+  background: #f9f5ff;
+  overflow-x: hidden;
+}
+
+/* ============================================================
+   NOISE TEXTURE OVERLAY
+============================================================ */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 9999; opacity: .5;
+}
+
+/* ============================================================
+   NAVBAR
+============================================================ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 32px;
+  background: rgba(249,245,255,.85);
+  backdrop-filter: blur(16px);
+  border-bottom: 1.5px solid rgba(180,160,240,.2);
+}
+.nav-logo {
+  font-family: var(--font-hand);
+  font-size: 1.5rem; font-weight: 700; color: var(--p2);
+  text-decoration: none;
+}
+.nav-links { display: flex; gap: 6px; flex-wrap: wrap; }
+.nav-links a {
+  font-size: .78rem; font-weight: 500; letter-spacing: .04em;
+  padding: 6px 14px; border-radius: 50px;
+  text-decoration: none; color: var(--text);
+  transition: background .2s, color .2s;
+}
+.nav-links a:hover { background: var(--lavender); color: var(--dark); }
+
+/* Live Counter */
+.live-counter {
+  display: flex; align-items: center; gap: 8px;
+  font-size: .8rem; font-weight: 600; color: var(--p5);
+  background: rgba(231,76,60,.1); border-radius: 50px;
+  padding: 5px 14px;
+}
+.live-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--p5);
+  animation: pulse 1.4s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%,100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: .5; transform: scale(1.4); }
+}
+
+/* ============================================================
+   HERO SECTION
+============================================================ */
+#home {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #fce4f0 0%, #e8d5f5 35%, #b8e4f9 70%, #b8f0d6 100%);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 120px 24px 60px;
+  position: relative; overflow: hidden;
+}
+.hero-blob {
+  position: absolute; border-radius: 50%;
+  filter: blur(60px); opacity: .35; pointer-events: none;
+}
+.hero-blob-1 { width: 500px; height: 500px; background: var(--blush); top: -100px; left: -150px; }
+.hero-blob-2 { width: 400px; height: 400px; background: var(--lavender); bottom: -100px; right: -100px; }
+.hero-blob-3 { width: 300px; height: 300px; background: var(--mint); top: 40%; left: 30%; }
+
+.hero-tag {
+  display: inline-block;
+  font-family: var(--font-hand); font-size: 1.1rem;
+  color: var(--p2); background: white; border-radius: 50px;
+  padding: 6px 20px; margin-bottom: 24px;
+  box-shadow: var(--shadow);
+  animation: fadeUp .8s ease both;
+}
+.hero-title {
+  font-family: var(--font-head); font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 800; line-height: 1.05; color: var(--dark);
+  margin-bottom: 28px;
+  animation: fadeUp .8s .15s ease both;
+}
+.hero-title span { color: var(--p2); position: relative; }
+.hero-title span::after {
+  content: '';
+  position: absolute; left: 0; bottom: -4px; right: 0; height: 6px;
+  background: linear-gradient(90deg, var(--blush), var(--lavender));
+  border-radius: 4px;
+}
+.hero-intro {
+  max-width: 680px; font-size: 1.05rem; line-height: 1.75;
+  color: var(--text); margin: 0 auto 48px;
+  animation: fadeUp .8s .28s ease both;
+}
+.hero-cta {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--p2), #6c3fc5);
+  color: white; font-family: var(--font-head); font-weight: 700;
+  font-size: 1rem; padding: 16px 40px; border-radius: 50px;
+  text-decoration: none; box-shadow: 0 8px 24px rgba(155,89,182,.35);
+  transition: transform .2s, box-shadow .2s;
+  animation: fadeUp .8s .4s ease both;
+}
+.hero-cta:hover { transform: translateY(-3px); box-shadow: 0 14px 32px rgba(155,89,182,.45); }
+
+/* scroll arrow */
+.scroll-hint {
+  position: absolute; bottom: 32px;
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  font-size: .75rem; color: var(--muted); letter-spacing: .08em;
+  animation: fadeUp .8s .6s ease both;
+}
+.scroll-arrow { font-size: 1.4rem; animation: bounce 1.8s infinite; }
+@keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(8px)} }
+@keyframes fadeUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
+
+/* ============================================================
+   SECTION WRAPPER
+============================================================ */
+.section-wrap { padding: 100px 24px; max-width: 1200px; margin: 0 auto; }
+.section-label {
+  font-family: var(--font-hand); font-size: 1.1rem;
+  color: var(--muted); margin-bottom: 10px; display: block;
+}
+.section-title {
+  font-family: var(--font-head); font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 800; line-height: 1.1; color: var(--dark);
+  margin-bottom: 16px;
+}
+.section-sub {
+  font-size: 1.05rem; color: var(--muted); max-width: 600px;
+  line-height: 1.7; margin-bottom: 56px;
+}
+
+/* ============================================================
+   CULTURAL GRID
+============================================================ */
+#explore { background: #fff; }
+.cultural-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+.culture-card {
+  position: relative; overflow: hidden;
+  border-radius: var(--r-lg); padding: 32px 24px;
+  cursor: pointer; text-decoration: none;
+  transition: transform .25s, box-shadow .25s;
+  display: flex; flex-direction: column; gap: 12px;
+  min-height: 220px; justify-content: flex-end;
+  box-shadow: var(--shadow);
+}
+.culture-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-hover); }
+.culture-card::before {
+  content: ''; position: absolute; inset: 0;
+  background: inherit; opacity: .15;
+  transition: opacity .25s;
+}
+.culture-card:hover::before { opacity: .25; }
+.culture-card .card-emoji { font-size: 2.8rem; }
+.culture-card .card-state {
+  font-family: var(--font-hand); font-size: 1.1rem;
+  font-weight: 700; color: white; opacity: .85;
+}
+.culture-card .card-pillar {
+  font-family: var(--font-head); font-size: 1.3rem;
+  font-weight: 800; color: white;
+}
+.culture-card .card-arrow {
+  position: absolute; top: 20px; right: 20px;
+  width: 36px; height: 36px; background: rgba(255,255,255,.25);
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem; color: white;
+  transition: background .2s;
+}
+.culture-card:hover .card-arrow { background: rgba(255,255,255,.45); }
+.cc-1 { background: linear-gradient(135deg, #FF7F50, #ff5e62); }
+.cc-2 { background: linear-gradient(135deg, #9B59B6, #6c3fc5); }
+.cc-3 { background: linear-gradient(135deg, #2ECC71, #00b09b); }
+.cc-4 { background: linear-gradient(135deg, #3498DB, #1a6bb5); }
+.cc-5 { background: linear-gradient(135deg, #E74C3C, #c0392b); }
+
+/* ============================================================
+   PILLAR SECTIONS
+============================================================ */
+.pillar-section {
+  padding: 0; scroll-margin-top: 80px;
+}
+.pillar-header {
+  padding: 80px 24px 60px;
+  max-width: 1200px; margin: 0 auto;
+  display: flex; align-items: flex-start; gap: 32px;
+  flex-wrap: wrap;
+}
+.pillar-number {
+  font-family: var(--font-head); font-size: clamp(5rem,12vw,9rem);
+  font-weight: 800; line-height: 1; opacity: .08;
+  flex-shrink: 0; margin-top: -20px;
+}
+.pillar-info { flex: 1; min-width: 260px; }
+.pillar-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  border-radius: 50px; padding: 6px 16px;
+  font-size: .78rem; font-weight: 700; letter-spacing: .08em;
+  text-transform: uppercase; margin-bottom: 16px;
+}
+.pillar-title {
+  font-family: var(--font-head); font-size: clamp(2rem,5vw,3.5rem);
+  font-weight: 800; line-height: 1.05; margin-bottom: 16px;
+}
+.pillar-creator {
+  font-family: var(--font-hand); font-size: 1.1rem; color: var(--muted);
+}
+.pillar-creator strong { color: var(--text); }
+
+/* Story flow cards */
+.story-flow {
+  max-width: 1200px; margin: 0 auto; padding: 0 24px 60px;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap: 20px;
+}
+.flow-card {
+  border-radius: var(--r-md); padding: 28px;
+  background: white; box-shadow: var(--shadow);
+  transition: transform .2s;
+}
+.flow-card:hover { transform: translateY(-4px); }
+.flow-step {
+  font-family: var(--font-hand); font-size: .9rem;
+  font-weight: 700; letter-spacing: .05em;
+  margin-bottom: 10px;
+}
+.flow-card h4 {
+  font-family: var(--font-head); font-size: 1rem; font-weight: 700;
+  margin-bottom: 8px;
+}
+.flow-card p { font-size: .9rem; line-height: 1.65; color: var(--muted); }
+
+/* Key Learning */
+.key-learning {
+  max-width: 1200px; margin: 0 auto 40px; padding: 0 24px;
+}
+.key-box {
+  border-radius: var(--r-lg); padding: 36px 40px;
+  display: flex; align-items: flex-start; gap: 20px;
+  box-shadow: var(--shadow);
+}
+.key-icon { font-size: 2.5rem; flex-shrink: 0; }
+.key-box h3 {
+  font-family: var(--font-hand); font-size: 1.4rem;
+  font-weight: 700; margin-bottom: 8px;
+}
+.key-box p { font-size: .95rem; line-height: 1.7; }
+
+/* Media containers */
+.media-wrap { max-width: 1200px; margin: 0 auto 40px; padding: 0 24px; }
+
+/* Swipeable gallery */
+.gallery-slider {
+  position: relative; overflow: hidden; border-radius: var(--r-lg);
+  box-shadow: var(--shadow);
+  background: #111;
+}
+.gallery-track {
+  display: flex; transition: transform .45s cubic-bezier(.4,0,.2,1);
+}
+.gallery-slide {
+  flex: 0 0 100%; min-width: 0;
+}
+.gallery-slide img {
+  width: 100%; height: 460px; object-fit: cover; display: block;
+}
+.gallery-btn {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 48px; height: 48px; border-radius: 50%;
+  background: rgba(255,255,255,.9); border: none; cursor: pointer;
+  font-size: 1.3rem; box-shadow: var(--shadow);
+  display: flex; align-items: center; justify-content: center;
+  transition: background .2s, transform .2s;
+  z-index: 2;
+}
+.gallery-btn:hover { background: white; transform: translateY(-50%) scale(1.08); }
+.gallery-prev { left: 16px; }
+.gallery-next { right: 16px; }
+.gallery-dots {
+  display: flex; justify-content: center; gap: 8px; padding: 16px 0;
+}
+.gallery-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: #ccc; cursor: pointer; transition: background .2s, transform .2s;
+}
+.gallery-dot.active { background: var(--accent); transform: scale(1.4); }
+
+/* Video embed */
+.video-wrap {
+  border-radius: var(--r-lg); overflow: hidden;
+  box-shadow: var(--shadow); background: #000;
+}
+.video-wrap iframe { display: block; }
+
+/* Comic strip */
+.comic-strip {
+  display: grid; grid-template-columns: 1fr;
+  gap: 0; border-radius: var(--r-lg); overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.comic-panel { position: relative; }
+.comic-panel img { width: 100%; display: block; }
+.comic-panel .panel-num {
+  position: absolute; top: 12px; left: 12px;
+  font-family: var(--font-head); font-size: .85rem; font-weight: 800;
+  background: white; border-radius: 50px; padding: 3px 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.15);
+}
+
+/* Timeline */
+.timeline { max-width: 900px; margin: 0 auto; position: relative; }
+.timeline::before {
+  content: ''; position: absolute; left: 50%; top: 0; bottom: 0;
+  width: 3px; background: linear-gradient(to bottom, var(--blush), var(--lavender), var(--mint));
+  transform: translateX(-50%);
+}
+.tl-item {
+  display: flex; gap: 32px; margin-bottom: 40px;
+  align-items: flex-start;
+}
+.tl-item:nth-child(even) { flex-direction: row-reverse; }
+.tl-content {
+  flex: 1; background: white; border-radius: var(--r-md);
+  padding: 20px; box-shadow: var(--shadow);
+  transition: transform .2s;
+}
+.tl-content:hover { transform: translateY(-3px); }
+.tl-content img {
+  width: 100%; border-radius: var(--r-sm); margin-bottom: 12px;
+  display: block;
+}
+.tl-dot {
+  width: 20px; height: 20px; border-radius: 50%;
+  background: var(--accent); border: 3px solid white;
+  box-shadow: var(--shadow); flex-shrink: 0;
+  margin-top: 20px; z-index: 1;
+  align-self: flex-start;
+}
+.tl-spacer { flex: 1; }
+.tl-step {
+  font-family: var(--font-hand); font-size: .9rem;
+  color: var(--muted); margin-bottom: 6px;
+}
+.tl-content h4 {
+  font-family: var(--font-head); font-size: 1rem;
+  font-weight: 700; margin-bottom: 6px;
+}
+.tl-content p { font-size: .88rem; color: var(--muted); line-height: 1.6; }
+
+/* Language toggle */
+.lang-toggle {
+  display: flex; align-items: center; gap: 16px; margin-bottom: 20px;
+}
+.lang-toggle label {
+  font-family: var(--font-head); font-weight: 700; font-size: .95rem;
+}
+.toggle-switch {
+  position: relative; width: 64px; height: 32px;
+}
+.toggle-switch input { opacity: 0; width: 0; height: 0; }
+.toggle-track {
+  position: absolute; inset: 0; border-radius: 50px;
+  background: var(--lavender); cursor: pointer;
+  transition: background .3s;
+}
+.toggle-track::after {
+  content: ''; position: absolute;
+  left: 4px; top: 4px; width: 24px; height: 24px;
+  border-radius: 50%; background: white;
+  box-shadow: 0 2px 6px rgba(0,0,0,.2);
+  transition: transform .3s;
+}
+.toggle-switch input:checked + .toggle-track { background: var(--p4); }
+.toggle-switch input:checked + .toggle-track::after { transform: translateX(32px); }
+.video-panel { display: none; }
+.video-panel.active { display: block; }
+
+/* ============================================================
+   WHAT WOULD YOU DO — SCENARIO
+============================================================ */
+.scenario-wrap { max-width: 1200px; margin: 0 auto 80px; padding: 0 24px; }
+.scenario-box {
+  border-radius: var(--r-lg); padding: 40px; background: white;
+  box-shadow: var(--shadow);
+}
+.scenario-tag {
+  font-family: var(--font-hand); font-size: 1.2rem; color: var(--muted);
+  display: block; margin-bottom: 12px;
+}
+.scenario-box h3 {
+  font-family: var(--font-head); font-size: 1.5rem; font-weight: 800;
+  margin-bottom: 8px;
+}
+.scenario-q {
+  font-size: .95rem; line-height: 1.7; color: var(--text);
+  background: #f8f6ff; border-radius: var(--r-md); padding: 20px;
+  margin: 16px 0 28px; border-left: 4px solid var(--accent);
+}
+.choices { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media(max-width:600px) { .choices { grid-template-columns: 1fr; } }
+.choice-btn {
+  border: 2px solid transparent; background: #f8f6ff;
+  border-radius: var(--r-md); padding: 18px 20px;
+  font-family: var(--font-body); font-size: .92rem; line-height: 1.6;
+  color: var(--text); cursor: pointer;
+  transition: all .2s; text-align: left; position: relative;
+}
+.choice-btn .choice-letter {
+  font-family: var(--font-head); font-size: 1.1rem; font-weight: 800;
+  display: block; margin-bottom: 6px; color: var(--accent);
+}
+.choice-btn:hover {
+  border-color: var(--accent); background: white;
+  transform: translateY(-2px); box-shadow: var(--shadow);
+}
+.choice-result {
+  margin-top: 20px; padding: 16px 20px;
+  border-radius: var(--r-md); font-size: .92rem; line-height: 1.65;
+  display: none; animation: fadeUp .35s ease;
+}
+.choice-result.show { display: block; }
+.result-a { background: #fff3cd; border-left: 4px solid #f0ad4e; }
+.result-b { background: #d4edda; border-left: 4px solid #28a745; }
+.result-label {
+  font-family: var(--font-head); font-weight: 700; display: block; margin-bottom: 4px;
+}
+
+/* Pillar-specific accent var overrides via classes */
+.p1 { --accent: var(--p1); }
+.p2 { --accent: var(--p2); }
+.p3 { --accent: var(--p3); }
+.p4 { --accent: var(--p4); }
+.p5 { --accent: var(--p5); }
+
+/* Pillar bg strips */
+.pillar-bg-1 { background: linear-gradient(180deg, #fff8f5 0%, #fff 100%); }
+.pillar-bg-2 { background: linear-gradient(180deg, #f8f4ff 0%, #fff 100%); }
+.pillar-bg-3 { background: linear-gradient(180deg, #f0fff8 0%, #fff 100%); }
+.pillar-bg-4 { background: linear-gradient(180deg, #f0f8ff 0%, #fff 100%); }
+.pillar-bg-5 { background: linear-gradient(180deg, #fff5f5 0%, #fff 100%); }
+
+/* ============================================================
+   FEEDBACK HUB
+============================================================ */
+#feedback {
+  background: linear-gradient(135deg, #e8d5f5 0%, #b8e4f9 50%, #b8f0d6 100%);
+  padding: 100px 24px;
+}
+.feedback-grid {
+  max-width: 1100px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
+  gap: 28px;
+}
+.fb-card {
+  background: rgba(255,255,255,.8); backdrop-filter: blur(12px);
+  border-radius: var(--r-lg); padding: 36px;
+  box-shadow: var(--shadow);
+}
+.fb-card h3 {
+  font-family: var(--font-head); font-size: 1.25rem; font-weight: 800;
+  margin-bottom: 8px;
+}
+.fb-card p { font-size: .88rem; color: var(--muted); margin-bottom: 20px; line-height: 1.6; }
+
+/* Poll */
+.poll-options { display: flex; flex-direction: column; gap: 10px; }
+.poll-option {
+  display: flex; align-items: center; gap: 12px;
+  background: white; border-radius: var(--r-md);
+  padding: 12px 16px; cursor: pointer;
+  border: 2px solid transparent;
+  transition: border-color .2s, background .2s;
+}
+.poll-option:hover { border-color: var(--lavender); background: #f8f5ff; }
+.poll-option input { accent-color: var(--p2); }
+.poll-option label { font-size: .9rem; cursor: pointer; flex: 1; }
+.poll-bar-wrap { height: 6px; background: #eee; border-radius: 4px; margin-top: 4px; overflow: hidden; }
+.poll-bar { height: 100%; border-radius: 4px; background: var(--p2); width: 0; transition: width .6s ease; }
+.poll-submit {
+  margin-top: 16px;
+  background: var(--p2); color: white;
+  border: none; border-radius: 50px; padding: 10px 28px;
+  font-family: var(--font-head); font-weight: 700; font-size: .9rem;
+  cursor: pointer; transition: transform .2s, box-shadow .2s;
+  box-shadow: 0 4px 12px rgba(155,89,182,.3);
+}
+.poll-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(155,89,182,.4); }
+.poll-thanks {
+  display: none; margin-top: 12px; font-family: var(--font-hand);
+  font-size: 1.2rem; color: var(--p3); text-align: center;
+}
+
+/* Word feel input */
+.feel-input {
+  width: 100%; border: 2px solid #e0d6f5;
+  border-radius: var(--r-md); padding: 12px 16px;
+  font-family: var(--font-body); font-size: 1rem;
+  outline: none; transition: border-color .2s;
+  margin-bottom: 12px;
+}
+.feel-input:focus { border-color: var(--p2); }
+.feel-submit {
+  background: var(--p3); color: white;
+  border: none; border-radius: 50px; padding: 10px 28px;
+  font-family: var(--font-head); font-weight: 700; font-size: .9rem;
+  cursor: pointer; transition: transform .2s, box-shadow .2s;
+}
+.feel-submit:hover { transform: translateY(-2px); }
+
+.word-cloud {
+  margin-top: 20px; padding: 20px;
+  background: white; border-radius: var(--r-md);
+  display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+  min-height: 90px;
+}
+.cloud-word {
+  font-family: var(--font-head); font-weight: 700;
+  border-radius: 50px; padding: 4px 14px;
+  transition: transform .2s;
+  cursor: default;
+}
+.cloud-word:hover { transform: scale(1.08); }
+
+/* Gallery placeholders */
+.gallery-placeholder {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 12px;
+}
+.gallery-ph-item {
+  aspect-ratio: 1; border-radius: var(--r-md);
+  background: linear-gradient(135deg, var(--blush), var(--lavender));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2rem; opacity: .6;
+}
+
+/* ============================================================
+   TEAM SECTION
+============================================================ */
+#team { background: #fff; padding: 100px 24px; }
+.team-grid {
+  max-width: 1100px; margin: 40px auto 0;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(180px,1fr));
+  gap: 24px;
+}
+.team-card {
+  text-align: center; padding: 36px 20px;
+  background: white; border-radius: var(--r-lg);
+  box-shadow: var(--shadow); transition: transform .25s;
+}
+.team-card:hover { transform: translateY(-6px); }
+.team-avatar {
+  width: 72px; height: 72px; border-radius: 50%; margin: 0 auto 16px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2rem;
+}
+.team-name {
+  font-family: var(--font-head); font-weight: 800; font-size: 1rem;
+  margin-bottom: 4px;
+}
+.team-role {
+  font-size: .8rem; color: var(--muted);
+}
+.ta-1 { background: linear-gradient(135deg, var(--peach), var(--blush)); }
+.ta-2 { background: linear-gradient(135deg, var(--lavender), var(--lilac)); }
+.ta-3 { background: linear-gradient(135deg, var(--mint), var(--sage)); }
+.ta-4 { background: linear-gradient(135deg, var(--sky), #a8d8f5); }
+.ta-5 { background: linear-gradient(135deg, var(--butter), var(--peach)); }
+
+.learnings-box {
+  max-width: 1100px; margin: 60px auto 0;
+  background: linear-gradient(135deg, #f8f4ff, #f0fff8);
+  border-radius: var(--r-lg); padding: 44px;
+  box-shadow: var(--shadow);
+}
+.learnings-box h3 {
+  font-family: var(--font-head); font-size: 1.6rem; font-weight: 800;
+  margin-bottom: 20px; color: var(--dark);
+}
+.learnings-box p {
+  font-size: 1rem; line-height: 1.8; color: var(--text);
+}
+
+/* ============================================================
+   FOOTER
+============================================================ */
+footer {
+  background: var(--dark); color: rgba(255,255,255,.5);
+  text-align: center; padding: 40px 24px;
+  font-size: .85rem; line-height: 1.7;
+}
+footer span { color: white; font-family: var(--font-hand); font-size: 1.1rem; }
+
+/* ============================================================
+   POPUP MODAL
+============================================================ */
+.modal-overlay {
+  position: fixed; inset: 0; background: rgba(26,26,46,.6);
+  backdrop-filter: blur(6px); z-index: 900;
+  display: none; align-items: center; justify-content: center;
+  padding: 24px;
+}
+.modal-overlay.open { display: flex; }
+.modal-box {
+  background: white; border-radius: var(--r-xl); padding: 48px;
+  max-width: 500px; width: 100%; text-align: center;
+  box-shadow: 0 32px 80px rgba(0,0,0,.2);
+  animation: fadeUp .35s ease;
+}
+.modal-emoji { font-size: 3.5rem; margin-bottom: 16px; }
+.modal-title {
+  font-family: var(--font-head); font-size: 1.6rem; font-weight: 800;
+  margin-bottom: 12px;
+}
+.modal-text { font-size: .95rem; line-height: 1.7; color: var(--muted); margin-bottom: 28px; }
+.modal-close {
+  background: var(--dark); color: white; border: none;
+  border-radius: 50px; padding: 12px 36px;
+  font-family: var(--font-head); font-weight: 700; cursor: pointer;
+  transition: transform .2s;
+}
+.modal-close:hover { transform: scale(1.04); }
+
+/* ============================================================
+   SECTION DIVIDER
+============================================================ */
+.wave-divider {
+  width: 100%; overflow: hidden; line-height: 0;
+  margin-bottom: -2px;
+}
+.wave-divider svg { display: block; }
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+@media(max-width:768px) {
+  nav { padding: 12px 16px; }
+  .nav-links { display: none; }
+  .pillar-header { padding: 60px 16px 40px; }
+  .timeline::before { left: 20px; }
+  .tl-item, .tl-item:nth-child(even) {
+    flex-direction: column; padding-left: 48px; position: relative;
+  }
+  .tl-dot { position: absolute; left: 8px; top: 20px; margin: 0; }
+  .tl-spacer { display: none; }
+  .key-box { flex-direction: column; }
+  .choices { grid-template-columns: 1fr; }
+}
+
+/* ============================================================
+   SCROLL REVEAL
+============================================================ */
+.reveal {
+  opacity: 0; transform: translateY(32px);
+  transition: opacity .6s ease, transform .6s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#home" class="nav-logo">✨ RealStories</a>
+  <div class="nav-links">
+    <a href="#explore">Explore</a>
+    <a href="#pillar1">Initiative</a>
+    <a href="#pillar2">Innovation</a>
+    <a href="#pillar3">Perseverance</a>
+    <a href="#pillar4">Conscientiousness</a>
+    <a href="#pillar5">Problem Solving</a>
+    <a href="#feedback">Feedback</a>
+    <a href="#team">Team</a>
+  </div>
+  <div class="live-counter">
+    <span class="live-dot"></span>
+    <span id="viewer-count">1</span> watching
+  </div>
+</nav>
+
+<section id="home">
+  <div class="hero-blob hero-blob-1"></div>
+  <div class="hero-blob hero-blob-2"></div>
+  <div class="hero-blob hero-blob-3"></div>
+
+  <div class="hero-tag">🇮🇳 Puducherry · Chhattisgarh · Arunachal Pradesh</div>
+  <h1 class="hero-title">Real Stories,<br><span>Real Change</span></h1>
+  <p class="hero-intro">Forget everything you know about boring moral science lectures; this right here is the real deal. We've crowdsourced raw, unfiltered stories from the coastal vibes of Puducherry, the heart of Chhattisgarh, and the hills of Arunachal Pradesh to show you what our core values actually look like in the wild. Step in, interact with the stories, and see if you've got what it takes to live them out.</p>
+  <a href="#explore" class="hero-cta">Start Exploring →</a>
+
+  <div class="scroll-hint">
+    <span>scroll down</span>
+    <span class="scroll-arrow">↓</span>
+  </div>
+</section>
+
+<section id="explore">
+  <div class="section-wrap">
+    <span class="section-label">✦ pick your story</span>
+    <h2 class="section-title">5 Values. 5 States.<br>1 Big Truth.</h2>
+    <p class="section-sub">Each card takes you into a real story, told by a real person, from a real corner of India.</p>
+
+    <div class="cultural-grid">
+      <a href="#pillar1" class="culture-card cc-1">
+        <div class="card-emoji">🌊</div>
+        <div class="card-state">Puducherry</div>
+        <div class="card-pillar">Taking Initiative</div>
+        <div class="card-arrow">→</div>
+      </a>
+      <a href="#pillar2" class="culture-card cc-2">
+        <div class="card-emoji">🌿</div>
+        <div class="card-state">Chhattisgarh</div>
+        <div class="card-pillar">Innovativeness</div>
+        <div class="card-arrow">→</div>
+      </a>
+      <a href="#pillar3" class="culture-card cc-3">
+        <div class="card-emoji">🪷</div>
+        <div class="card-state">Puducherry</div>
+        <div class="card-pillar">Perseverance</div>
+        <div class="card-arrow">→</div>
+      </a>
+      <a href="#pillar4" class="culture-card cc-4">
+        <div class="card-emoji">🏔️</div>
+        <div class="card-state">Bihar / Arunachal</div>
+        <div class="card-pillar">Conscientiousness</div>
+        <div class="card-arrow">→</div>
+      </a>
+      <a href="#pillar5" class="culture-card cc-5">
+        <div class="card-emoji">🔥</div>
+        <div class="card-state">Chhattisgarh</div>
+        <div class="card-pillar">Problem Solving</div>
+        <div class="card-arrow">→</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="pillar1" class="pillar-section pillar-bg-1 p1">
+
+  <div class="pillar-header">
+    <div class="pillar-number" style="color:var(--p1)">01</div>
+    <div class="pillar-info">
+      <div class="pillar-badge" style="background:#fff3ee;color:var(--p1)">🌊 Pillar 1 · Puducherry</div>
+      <h2 class="pillar-title" style="color:var(--dark)">Taking<br>Initiative</h2>
+      <p class="pillar-creator">Story by <strong>Madhumita</strong> · Puducherry</p>
+    </div>
+  </div>
+
+  <div class="story-flow reveal">
+    <div class="flow-card">
+      <div class="flow-step" style="color:var(--p1)">📍 Situation</div>
+      <h4>A Community in Need</h4>
+      <p>Kavya noticed her neighbourhood lacked basic awareness about waste segregation and sustainable living despite being so close to the ocean ecosystem.</p>
+    </div>
+    <div class="flow-card">
+      <div class="flow-step" style="color:var(--p1)">⚡ Problem</div>
+      <h4>No One Was Acting</h4>
+      <p>Everyone knew the problem existed, but people waited for someone else — a local authority, an NGO, a teacher — to step up first.</p>
+    </div>
+    <div class="flow-card">
+      <div class="flow-step" style="color:var(--p1)">🚀 Action</div>
+      <h4>She Didn't Wait</h4>
+      <p>Madhumita launched a weekend awareness drive, built a small volunteer network, and created visual storytelling that the community could actually connect with.</p>
+    </div>
+    <div class="flow-card">
+      <div class="flow-step" style="color:var(--p1)">✨ The Change</div>
+      <h4>Ripples Became Waves</h4>
+      <p>What started as one person's decision became a movement. Three streets, then ten. Her initiative showed others that change starts the moment one person decides to go first.</p>
+    </div>
+  </div>
+
+  <div class="media-wrap reveal">
+    <div class="gallery-slider" id="gallery1">
+      <div class="gallery-track" id="track1">
+        <div class="gallery-slide"><img src="Photos/1.TI/TI1.png" alt="Initiative 1" loading="lazy"></div>
+        <div class="gallery-slide"><img src="Photos/1.TI/TI2.png" alt="Initiative 2" loading="lazy"></div>
+        <div class="gallery-slide"><img src="Photos/1.TI/TI3.png" alt="Initiative 3" loading="lazy"></div>
+        <div class="gallery-slide"><img src="Photos/1.TI/TI4.png" alt="Initiative 4" loading="lazy"></div>
+        <div class="gallery-slide"><img src="Photos/1.TI/TI5.png" alt="Initiative 5" loading="lazy"></div>
+        <div class="gallery-slide"><img src="Photos/1.TI/TI6.png" alt="Initiative 6" loading="lazy"></div>
+      </div>
+      <button class="gallery-btn gallery-prev" onclick="slide('track1','dots1',-1)">‹</button>
+      <button class="gallery-btn gallery-next" onclick="slide('track1','dots1',1)">›</button>
+    </div>
+    <div class="gallery-dots" id="dots1"></div>
+  </div>
+
+  
+
+  <div class="key-learning reveal">
+    <div class="key-box" style="background:#fff3ee;">
+      <div class="key-icon">💡</div>
+      <div>
+        <h3 style="color:var(--p1)">Key Learning</h3>
+        <p>Taking initiative doesn't mean having all the answers. It means being the first to raise your hand when everyone else is looking around. The moment you act, you give others permission to act too.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="scenario-wrap reveal">
+    <div class="scenario-box">
+      <span class="scenario-tag">🤔 What Would You Do?</span>
+      <h3>Here's Your Moment</h3>
+      <div class="scenario-q">
+        It's the day before your college fest, and the vendor just bailed on the stage decorations. Everyone is panicking in the WhatsApp group, waiting for the faculty coordinator to wake up and fix it.
+      </div>
+      <div class="choices">
+        <button class="choice-btn" onclick="showResult('res1a','res1b')">
+          <span class="choice-letter" style="color:var(--p1)">A</span>
+          Drop a "praying for us 🙏" text in the group and go back to scrolling Insta until someone else figures it out.
+        </button>
+        <button class="choice-btn" onclick="showResult('res1b','res1a')">
+          <span class="choice-letter" style="color:var(--p1)">B</span>
+          Call the local market vendors you know, get three quick quotes, and present a backup plan to the group chat.
+        </button>
+      </div>
+      <div class="choice-result result-a" id="res1a">
+        <span class="result-label">😬 Classic Bystander!</span>
+        You avoided the stress, but you also missed the chance to be the hero. Classic bystander effect in action.
+      </div>
+      <div class="choice-result result-b" id="res1b">
+        <span class="result-label">🌟 Main Character Energy Unlocked!</span>
+        You stepped up and took control when the panic hit. That's initiative — messy, real, and powerful.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="pillar2" class="pillar-section pillar-bg-2 p2">
+
+  <div class="pillar-header">
+    <div class="pillar-number" style="color:var(--p2)">02</div>
+    <div class="pillar-info">
+      <div class="pillar-badge" style="background:#f5f0ff;color:var(--p2)">🌿 Pillar 2 · Chhattisgarh</div>
+      <h2 class="pillar-title" style="color:var(--dark)">Innova-<br>tiveness</h2>
+      <p class="pillar-creator">Story by <strong>Rudra</strong> · Chhattisgarh</p>
+    </div>
+  </div>
+
+<div class="story-flow reveal">
+    <div class="flow-card">
+      <div class="flow-step" style="color:var(--p2)">📍 Situation</div>
+      <h4>The Failing Harvest</h4>
+      <p>In a small village in Madhya Pradesh, Ravi's family struggled. His father was a farmer, but their crops failed every year, leaving them in deep financial hardship.</p>
+    </div>
+    <div class="flow-card">
+      <div class="flow-step" style="color:var(--p2)">⚡️ Problem</div>
+      <h4>Laughed At</h4>
+      <p>Ravi's dreams felt heavier than his reality. When he decided to try and find a new way to save the crops, the local villagers just laughed at him.</p>
+    </div>
+    <div class="flow-card">
+      <div class="flow-step" style="color:var(--p2)">🚀 Action</div>
+      <h4>The Bottle Solution</h4>
+      <p>Refusing to give up, Ravi thought outside the box. He gathered discarded waste bottles and used them to create a simple, low-cost drip irrigation system.</p>
+    </div>
+    <div class="flow-card">
+      <div class="flow-step" style="color:var(--p2)">✨ The Change</div>
+      <h4>A Proud Discovery</h4>
+      <p>The innovative system worked! The once-skeptical villagers were amazed, and his father realized that even small, creative ideas can solve massive real-world problems.</p>
+    </div>
+  </div>
+
+  <div class="media-wrap reveal">
+    <div class="video-wrap">
+        <iframe width="100%" height="480" src="https://www.youtube.com/embed/Apcg50xT4qY?si=Gc4OENHRrkAiM78n" frameborder="0" allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <div class="key-learning reveal">
+    <div class="key-box" style="background:#f5f0ff;">
+      <div class="key-icon">🔮</div>
+      <div>
+        <h3 style="color:var(--p2)">Key Learning</h3>
+        <p>Innovativeness isn't about inventing something from scratch. It's about seeing a familiar problem from an unfamiliar angle and having the courage to try something different.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="scenario-wrap reveal">
+    <div class="scenario-box">
+      <span class="scenario-tag">🤔 What Would You Do?</span>
+      <h3>Here's Your Moment</h3>
+      <div class="scenario-q">
+        Your hostel mess food has been practically inedible for a week, and everyone is surviving entirely on instant noodles. The warden won't listen to standard complaints anymore.
+      </div>
+      <div class="choices">
+        <button class="choice-btn" onclick="showResult('res2a','res2b')">
+          <span class="choice-letter" style="color:var(--p2)">A</span>
+          Start an online petition that everyone signs, but the warden inevitably ignores because "students always complain."
+        </button>
+        <button class="choice-btn" onclick="showResult('res2b','res2a')">
+          <span class="choice-letter" style="color:var(--p2)">B</span>
+          Organize a "Mess Hack" night where everyone brings one cheap ingredient, and you work with the cooks to upgrade the existing meals.
+        </button>
+      </div>
+      <div class="choice-result result-a" id="res2a">
+        <span class="result-label">😅 A Bit Basic</span>
+        Petitions are nice, but they don't actually change the menu tonight, do they? Think more creatively!
+      </div>
+      <div class="choice-result result-b" id="res2b">
+        <span class="result-label">🧠 Big Brain Move!</span>
+        You turned a shared annoyance into a creative, community-driven solution. That's innovation with heart.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="pillar3" class="pillar-section pillar-bg-3 p3">
+
+  <div class="pillar-header">
+    <div class="pillar-number" style="color:var(--p3)">03</div>
+    <div class="pillar-info">
+      <div class="pillar-badge" style="background:#f0fff8;color:var(--p3)">🪷 Pillar 3 · Puducherry</div>
+      <h2 class="pillar-title" style="color:var(--dark)">Perse-<br>verance</h2>
+      <p class="pillar-creator">Story by <strong>Rebeka</strong> · Puducherry</p>
+    </div>
+  </div>
+
+  <div class="story-flow reveal">
+    <div class="flow-card">
+      <div class="flow-step" style="color:var(--p3)">📍 Situation</div>
+      <h4>A Dream Worth Fighting For</h4>
+      <p>Oviya set her sights on a goal that seemed far beyond what her circumstances would typically allow — but she refused to let circumstances write her story.</p>
+    </div>
+    <div class="flow-card">
+      <div class="flow-step" style="color:var(--p3)">⚡ Problem</div>
+      <h4>The Setbacks Kept Coming</h4>
+      <p>Failure after failure. People telling her it wasn't realistic. Resources drying up. Every step forward seemed to come with two steps back.</p>
+    </div>
+    <div class="flow-card">
+      <div class="flow-step" style="color:var(--p3)">🚀 Action</div>
+      <h4>She Kept Showing Up</h4>
+      <p>Not with blind optimism, but with grit. She adapted, learned from each setback, and kept going when quitting would have been the easier choice.</p>
+    </div>
+    <div class="flow-card">
+      <div class="flow-step" style="color:var(--p3)">✨ The Change</div>
+      <h4>The Breakthrough</h4>
+      <p>Eventually, the consistency paid off. And the most powerful part? The journey itself had shaped her into someone far stronger than the destination could have.</p>
+    </div>
+  </div>
+
+  <div class="media-wrap reveal">
+    <div class="gallery-slider" id="gallery3">
+      <div class="gallery-track" id="track3">
+        <div class="gallery-slide"><img src="Photos/3.Per/PER1.png" alt="Panel 1" loading="lazy"></div>
+        <div class="gallery-slide"><img src="Photos/3.Per/PER2.png" alt="Panel 2" loading="lazy"></div>
+        <div class="gallery-slide"><img src="Photos/3.Per/PER3.png" alt="Panel 3" loading="lazy"></div>
+        <div class="gallery-slide"><img src="Photos/3.Per/PER4.png" alt="Panel 4" loading="lazy"></div>
+        <div class="gallery-slide"><img src="Photos/3.Per/PER5.png" alt="Panel 5" loading="lazy"></div>
+        <div class="gallery-slide"><img src="Photos/3.Per/PER6.png" alt="Panel 6" loading="lazy"></div>
+      
+      </div>
+      <button class="gallery-btn gallery-prev" onclick="slide('track3','dots3',-1)">‹</button>
+      <button class="gallery-btn gallery-next" onclick="slide('track3','dots3',1)">›</button>
+    </div>
+    <div class="gallery-dots" id="dots3"></div>
+  </div>
+
+  <div class="key-learning reveal">
+    <div class="key-box" style="background:#f0fff8;">
+      <div class="key-icon">💪</div>
+      <div>
+        <h3 style="color:var(--p3)">Key Learning</h3>
+        <p>Perseverance isn't about never falling. It's about deciding — every single time — that the fall is not the final chapter. The comeback is always more powerful than the setback.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="scenario-wrap reveal">
+    <div class="scenario-box">
+      <span class="scenario-tag">🤔 What Would You Do?</span>
+      <h3>Here's Your Moment</h3>
+      <div class="scenario-q">
+        You've been working on a massive group project for a month, but your laptop crashes 48 hours before the deadline, wiping out half the presentation.
+      </div>
+      <div class="choices">
+        <button class="choice-btn" onclick="showResult('res3a','res3b')">
+          <span class="choice-letter" style="color:var(--p3)">A</span>
+          Email the professor a sob story asking for an extension and throw together a sloppy Canva deck just in case.
+        </button>
+        <button class="choice-btn" onclick="showResult('res3b','res3a')">
+          <span class="choice-letter" style="color:var(--p3)">B</span>
+          Take a deep breath, borrow your roommate's laptop, pull an all-nighter, and reconstruct the missing slides from memory and your messy notes.
+        </button>
+      </div>
+      <div class="choice-result result-a" id="res3a">
+        <span class="result-label">😬 The Setback Won</span>
+        You let the setback win, settling for a lower grade when you had the time to bounce back. Perseverance isn't easy, but it's worth it.
+      </div>
+      <div class="choice-result result-b" id="res3b">
+        <span class="result-label">🏆 That's Resilience!</span>
+        You didn't just survive the crisis; you pushed through it to deliver! That's exactly what perseverance looks like in real life.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="pillar4" class="pillar-section pillar-bg-4 p4">
+
+  <div class="pillar-header">
+    <div class="pillar-number" style="color:var(--p4)">04</div>
+    <div class="pillar-info">
+      <div class="pillar-badge" style="background:#f0f8ff;color:var(--p4)">🏔️ Pillar 4 · Bihar / Arunachal</div>
+      <h2 class="pillar-title" style="color:var(--dark)">Conscien-<br>tiousness</h2>
+      <p class="pillar-creator">Story by <strong>Anshu</strong> · Bihar / Arunachal Pradesh</p>
+    </div>
+  </div>
+
+<div class="story-flow reveal">
+    <div class="flow-card">
+      <div class="flow-step" style="color:var(--p2)">📍 Situation</div>
+      <h4>The Unexplained Defeat</h4>
+      <p>Despite studying relentlessly, Aarav faces a crushing exam rejection. His successful father, Rahul, is left devastated and seeking answers.</p>
+    </div>
+    <div class="flow-card">
+      <div class="flow-step" style="color:var(--p2)">⚡️ Problem</div>
+      <h4>The Habit of Shortcuts</h4>
+      <p>Years ago, Rahul sacrificed his integrity for easy success. Cheating to stay on top became a lifelong habit, leading him to build his career on lazy shortcuts.</p>
+    </div>
+    <div class="flow-card">
+      <div class="flow-step" style="color:var(--p2)">🚀 Action</div>
+      <h4>Exposing the Flaw</h4>
+      <p>Vivek, Rahul's honest childhood friend, exposes a massive hack in the national exam system. A lazy coding shortcut had ruined the future of thousands of students.</p>
+    </div>
+    <div class="flow-card">
+      <div class="flow-step" style="color:var(--p2)">✨ The Change</div>
+      <h4>The Ultimate Realization</h4>
+      <p>Rahul makes a horrifying discovery: the broken system that failed his son was built by his own past shortcuts. Your darkest choices eventually become your reality.</p>
+    </div>
+  </div>
+
+  <div class="media-wrap reveal">
+    <div class="lang-toggle">
+      <label>🇬🇧 English</label>
+      <label class="toggle-switch">
+        <input type="checkbox" id="langToggle" onchange="toggleLang()">
+        <span class="toggle-track"></span>
+      </label>
+      <label>🇮🇳 हिन्दी</label>
+    </div>
+    <div class="video-wrap">
+      <div class="video-panel active" id="videoEN">
+        <iframe width="100%" height="480" src="https://www.youtube.com/embed/dHEo_cWTKmg" frameborder="0" allowfullscreen></iframe>
+      </div>
+      <div class="video-panel" id="videoHI">
+        <iframe width="100%" height="480" src="https://www.youtube.com/embed/8MC0RiLo73c" frameborder="0" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
+  <div class="key-learning reveal">
+    <div class="key-box" style="background:#f0f8ff;">
+      <div class="key-icon">⚖️</div>
+      <div>
+        <h3 style="color:var(--p4)">Key Learning</h3>
+        <p>Conscientiousness is integrity at its most everyday level. It's the tiny choices — logging out of someone's account, submitting your own work, keeping a promise you made quietly — that define who you actually are.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="scenario-wrap reveal">
+    <div class="scenario-box">
+      <span class="scenario-tag">🤔 What Would You Do?</span>
+      <h3>Here's Your Moment</h3>
+      <div class="scenario-q">
+        You're using the college library printer and notice the student before you stayed logged into their account, which still has 500 pre-paid print credits.
+      </div>
+      <div class="choices">
+        <button class="choice-btn" onclick="showResult('res4a','res4b')">
+          <span class="choice-letter" style="color:var(--p4)">A</span>
+          Quickly print your 20-page assignment using their account — it's just a few pages, they won't even notice it's gone.
+        </button>
+        <button class="choice-btn" onclick="showResult('res4b','res4a')">
+          <span class="choice-letter" style="color:var(--p4)">B</span>
+          Log them out completely, log into your own account, and pay for your own prints.
+        </button>
+      </div>
+      <div class="choice-result result-a" id="res4a">
+        <span class="result-label">😬 Ouch, Karma's Keeping Track!</span>
+        Just because it's easy and hidden doesn't make it right. Conscientiousness means doing right even when the stakes feel microscopic.
+      </div>
+      <div class="choice-result result-b" id="res4b">
+        <span class="result-label">💚 Absolute Green Flag!</span>
+        You did the right thing even when literally no one was watching. That kind of integrity is rare and powerful.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="pillar5" class="pillar-section pillar-bg-5 p5">
+
+  <div class="pillar-header">
+    <div class="pillar-number" style="color:var(--p5)">05</div>
+    <div class="pillar-info">
+      <div class="pillar-badge" style="background:#fff5f5;color:var(--p5)">🔥 Pillar 5 · Chhattisgarh</div>
+      <h2 class="pillar-title" style="color:var(--dark)">Problem<br>Solving</h2>
+      <p class="pillar-creator">Story by <strong>Shubhanshu</strong> · Chhattisgarh</p>
+    </div>
+  </div>
+
+  <div class="story-flow reveal">
+    <div class="flow-card">
+      <div class="flow-step" style="color:var(--p5)">📍 Situation</div>
+      <h4>Spot the Symptoms</h4>
+      <p>Nagesh's community was facing a tough issue, but everyone was just looking at the surface-level symptoms instead of the actual issue.</p>
+    </div>
+    <div class="flow-card">
+      <div class="flow-step" style="color:var(--p5)">⚡ Problem</div>
+      <h4>Feeling Powerless</h4>
+      <p>It was easy for people to fall into the trap of feeling powerless and just blaming others. No one was looking deeper.</p>
+    </div>
+    <div class="flow-card">
+      <div class="flow-step" style="color:var(--p5)">🚀 Action</div>
+      <h4>The 5-Why Model</h4>
+      <p>Shubhanshu decided to own the problem. He used the 5-Why model, refusing to stop at the first obvious cause, and kept digging until he found the real root of the issue.</p>
+    </div>
+    <div class="flow-card">
+      <div class="flow-step" style="color:var(--p5)">✨ The Change</div>
+      <h4>Digging at the Roots</h4>
+      <p>By digging at the roots instead of just hacking at the leaves, he found a real problem with an implementable solution that made an actual difference.</p>
+    </div>
+  </div>
+
+  <div class="media-wrap reveal">
+    <div class="timeline" id="tl5">
+
+      <div class="tl-item">
+        <div class="tl-content">
+          <img src="Photos/5.PS/PS_1.png" alt="Step 1" loading="lazy">
+          <div class="tl-step" style="color:var(--p5)">Step 01</div>
+          <h4>Spot the Symptoms</h4>
+          <p>Look at the obvious issues happening on the surface, but remember that these are just the leaves of the tree.</p>
+        </div>
+        <div class="tl-dot" style="background:var(--p5)"></div>
+        <div class="tl-spacer"></div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-spacer"></div>
+        <div class="tl-dot" style="background:var(--p5)"></div>
+        <div class="tl-content">
+          <img src="Photos/5.PS/PS_2.png" alt="Step 2" loading="lazy">
+          <div class="tl-step" style="color:var(--p5)">Step 02</div>
+          <h4>Ask the 5 Whys</h4>
+          <p>Don't just list the first cause that comes to mind and stop there. Keep asking "Why?" to dig much deeper.</p>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-content">
+          <img src="Photos/5.PS/PS_3.png" alt="Step 3" loading="lazy">
+          <div class="tl-step" style="color:var(--p5)">Step 03</div>
+          <h4>Find the Root Cause</h4>
+          <p>Keep digging until you uncover the real problem—the one that actually has a practical, implementable solution.</p>
+        </div>
+        <div class="tl-dot" style="background:var(--p5)"></div>
+        <div class="tl-spacer"></div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-spacer"></div>
+        <div class="tl-dot" style="background:var(--p5)"></div>
+        <div class="tl-content">
+          <img src="Photos/5.PS/PS_4.png" alt="Step 4" loading="lazy">
+          <div class="tl-step" style="color:var(--p5)">Step 04</div>
+          <h4>Reverse Brainstorm</h4>
+          <p>Stuck? Try reversing the problem to collect fresh ideas, and then flip those ideas to find your ultimate solution.</p>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-content">
+          <img src="Photos/5.PS/PS_5.png" alt="Step 5" loading="lazy">
+          <div class="tl-step" style="color:var(--p5)">Step 05</div>
+          <h4>Own the Solution</h4>
+          <p>Avoid the trap of feeling powerless. Empower yourself, take charge, and be the one to make a real difference.</p>
+        </div>
+        <div class="tl-dot" style="background:var(--p5)"></div>
+        <div class="tl-spacer"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="media-wrap reveal">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;border-radius:var(--r-lg);overflow:hidden;">
+      <img src="Photos/5.PS/PS7.jpeg" style="width:100%;aspect-ratio:1;object-fit:cover;" loading="lazy" alt="">
+      <img src="Photos/5.PS/PS8.jpeg" style="width:100%;aspect-ratio:1;object-fit:cover;" loading="lazy" alt="">
+      <img src="Photos/5.PS/PS9.jpeg" style="width:100%;aspect-ratio:1;object-fit:cover;" loading="lazy" alt="">
+      <img src="Photos/5.PS/PS10.png" style="width:100%;aspect-ratio:1;object-fit:cover;" loading="lazy" alt="">
+      <img src="Photos/5.PS/PS11.jpg" style="width:100%;aspect-ratio:1;object-fit:cover;" loading="lazy" alt="">
+      <img src="Photos/5.PS/PS12.jpg" style="width:100%;aspect-ratio:1;object-fit:cover;" loading="lazy" alt="">
+    </div>
+  </div>
+
+  <div class="media-wrap reveal">
+    <div class="video-wrap">
+      <iframe src="https://drive.google.com/file/d/1fDuGTrRlgLa6SIYXVIWh952QNb8c0fpf/preview" width="100%" height="480" allow="autoplay" style="border:none;"></iframe>
+    </div>
+  </div>
+
+  <div class="key-learning reveal">
+    <div class="key-box" style="background:#fff5f5;">
+      <div class="key-icon">🔑</div>
+      <div>
+        <h3 style="color:var(--p5)">Key Learning</h3>
+        <p>True leaders don't play the victim; they own the problem and empower themselves. Don't just hack at the leaves—ask "Why?" until you find a root cause you can actually fix.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="scenario-wrap reveal">
+    <div class="scenario-box">
+      <span class="scenario-tag">🤔 What Would You Do?</span>
+      <h3>Here's Your Moment</h3>
+      <div class="scenario-q">
+        Your college club's events are suddenly getting zero attendance. The rest of the committee is just complaining that "students are lazy these days." What is your move?
+      </div>
+      <div class="choices">
+        <button class="choice-btn" onclick="showResult('res5a','res5b')">
+          <span class="choice-letter" style="color:var(--p5)">A</span>
+          Agree with them. Accept that students are lazy, feel completely powerless, and just complain with the rest of the team.
+        </button>
+        <button class="choice-btn" onclick="showResult('res5b','res5a')">
+          <span class="choice-letter" style="color:var(--p5)">B</span>
+          Take a step back and ask "Why?" five times to figure out the real reason people aren't showing up, so you can build a solution that works.
+        </button>
+      </div>
+      <div class="choice-result result-a" id="res5a">
+        <span class="result-label">👻 Avoidance Is Not a Strategy</span>
+        Agreeing might feel easier in the moment, but it doesn't solve the problem. Don't just hack at the leaves!
+      </div>
+      <div class="choice-result result-b" id="res5b">
+        <span class="result-label">🧩 Logic Over Emotion!</span>
+        You dug for the root cause instead of settling for the symptom. That's real problem-solving energy.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="feedback">
+  <div style="max-width:1100px;margin:0 auto;">
+    <span class="section-label" style="color:rgba(255,255,255,.7)">✦ your turn to talk</span>
+    <h2 class="section-title" style="color:white;margin-bottom:8px;">The Feedback Hub</h2>
+    <p style="font-size:1rem;color:rgba(255,255,255,.75);margin-bottom:48px;line-height:1.7;">You've seen the stories. Now tell us what you think.</p>
+
+    <div class="feedback-grid">
+
+      <div class="fb-card">
+        <h3>Which pillar hit different?</h3>
+        <p>Quick vote — which value did you connect with most?</p>
+        <div class="poll-options" id="poll1">
+          <div class="poll-option"><input type="radio" name="p1" id="p1a" value="Initiative"><label for="p1a">🌊 Taking Initiative</label></div>
+          <div class="poll-option"><input type="radio" name="p1" id="p1b" value="Innovation"><label for="p1b">🔮 Innovativeness</label></div>
+          <div class="poll-option"><input type="radio" name="p1" id="p1c" value="Perseverance"><label for="p1c">💪 Perseverance</label></div>
+          <div class="poll-option"><input type="radio" name="p1" id="p1d" value="Conscientiousness"><label for="p1d">⚖️ Conscientiousness</label></div>
+          <div class="poll-option"><input type="radio" name="p1" id="p1e" value="Problem Solving"><label for="p1e">🧩 Problem Solving</label></div>
+        </div>
+        <button class="poll-submit" onclick="submitPoll('poll1','thanks1')">Cast My Vote</button>
+        <div class="poll-thanks" id="thanks1">✅ Thanks for voting! Your voice matters.</div>
+      </div>
+
+      <div class="fb-card">
+        <h3>Which story felt most real?</h3>
+        <p>The rawest, most relatable story from the five?</p>
+        <div class="poll-options" id="poll2">
+          <div class="poll-option"><input type="radio" name="p2" id="p2a" value="Madhumita"><label for="p2a">🌊 Madhumita's (Initiative)</label></div>
+          <div class="poll-option"><input type="radio" name="p2" id="p2b" value="Rudra"><label for="p2b">🌿 Rudra's (Innovation)</label></div>
+          <div class="poll-option"><input type="radio" name="p2" id="p2c" value="Rebeka"><label for="p2c">🪷 Rebeka's (Perseverance)</label></div>
+          <div class="poll-option"><input type="radio" name="p2" id="p2d" value="Anshu"><label for="p2d">🏔️ Anshu's (Conscientiousness)</label></div>
+          <div class="poll-option"><input type="radio" name="p2" id="p2e" value="Shubhanshu"><label for="p2e">🔥 Shubhanshu's (Problem Solving)</label></div>
+        </div>
+        <button class="poll-submit" onclick="submitPoll('poll2','thanks2')">Cast My Vote</button>
+        <div class="poll-thanks" id="thanks2">✅ Thanks for voting! Your voice matters.</div>
+      </div>
+
+      <div class="fb-card">
+        <h3>One word. Go.</h3>
+        <p>How did these stories make you feel in exactly one word?</p>
+        <input class="feel-input" type="text" id="feelInput" placeholder="e.g. Inspired, Valid, Hyped..." maxlength="20">
+        <button class="feel-submit" onclick="addToCloud()">Add to Cloud</button>
+        <div class="word-cloud" id="wordCloud">
+          <span class="cloud-word" style="font-size:1.5rem;color:#9B59B6;background:#f5f0ff;">Valid</span>
+          <span class="cloud-word" style="font-size:1.1rem;color:#2ECC71;background:#f0fff8;">Seen</span>
+          <span class="cloud-word" style="font-size:1.8rem;color:#E74C3C;background:#fff5f5;">Inspired</span>
+          <span class="cloud-word" style="font-size:1rem;color:#3498DB;background:#f0f8ff;">Real</span>
+          <span class="cloud-word" style="font-size:1.4rem;color:#FF7F50;background:#fff3ee;">Hyped</span>
+          <span class="cloud-word" style="font-size:1.2rem;color:#9B59B6;background:#f5f0ff;">Motivated</span>
+          <span class="cloud-word" style="font-size:.95rem;color:#2ECC71;background:#f0fff8;">Wow</span>
+          <span class="cloud-word" style="font-size:1.6rem;color:#E74C3C;background:#fff5f5;">Fire 🔥</span>
+        </div>
+      </div>
+
+      <div class="fb-card" style="grid-column: span 1;">
+        <h3>Campaign in Action 📸</h3>
+        <p>Photos from the ground — your friends, your community, your campaign. Drop yours below.</p>
+        <div class="gallery-placeholder">
+          <div class="gallery-ph-item">📷</div>
+          <div class="gallery-ph-item">🤳</div>
+          <div class="gallery-ph-item">🎉</div>
+          <div class="gallery-ph-item">🌟</div>
+          <div class="gallery-ph-item">💫</div>
+          <div class="gallery-ph-item">✨</div>
+        </div>
+        <p style="margin-top:14px;font-size:.8rem;text-align:center;color:var(--muted);">Photo gallery coming soon — stay tuned!</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="team">
+  <div style="max-width:1100px;margin:0 auto;">
+    <span class="section-label">✦ the people behind it</span>
+    <h2 class="section-title">Meet the Team</h2>
+    <p class="section-sub">Five people, three states, one shared mission — to make values feel human again.</p>
+
+    <div class="team-grid">
+      <div class="team-card reveal">
+        <div class="team-avatar ta-1">🌊</div>
+        <div class="team-name">Madhumita</div>
+        <div class="team-role">Taking Initiative · Puducherry</div>
+      </div>
+      <div class="team-card reveal">
+        <div class="team-avatar ta-2">🌿</div>
+        <div class="team-name">Rudra</div>
+        <div class="team-role">Innovativeness · Chhattisgarh</div>
+      </div>
+      <div class="team-card reveal">
+        <div class="team-avatar ta-3">🪷</div>
+        <div class="team-name">Rebeka</div>
+        <div class="team-role">Perseverance · Puducherry</div>
+      </div>
+      <div class="team-card reveal">
+        <div class="team-avatar ta-4">🏔️</div>
+        <div class="team-name">Anshu</div>
+        <div class="team-role">Conscientiousness · Bihar / Arunachal</div>
+      </div>
+      <div class="team-card reveal">
+        <div class="team-avatar ta-5">🔥</div>
+        <div class="team-name">Shubhanshu</div>
+        <div class="team-role">Problem Solving · Chhattisgarh</div>
+      </div>
+    </div>
+
+    <div class="learnings-box reveal">
+      <h3>What We Learned Building This 🚀</h3>
+      <p>Building this campaign was a wild ride, especially since our team was completely remote, juggling college lives and coordinating across Puducherry, Chhattisgarh, and Arunachal Pradesh. We hit some serious roadblocks along the way, from terrible network connectivity dropping our video calls to struggling to merge our wildly different creative visions. But honestly, navigating that chaos is where the magic happened. We quickly realized we couldn't just preach about these values; we had to actually use problem-solving to fix our tech glitches and take initiative to finish editing our media files when deadlines got impossibly tight. Ultimately, pushing through those real-life setbacks together is exactly what brought this project to life.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p><span>Real Stories, Real Change</span></p>
+  <p style="margin-top:8px;">A campaign by five students from across India · Puducherry · Chhattisgarh · Arunachal Pradesh</p>
+  <p style="margin-top:6px;">Made with 💜 and a lot of late-night calls</p>
+</footer>
+
+<div class="modal-overlay" id="modal">
+  <div class="modal-box">
+    <div class="modal-emoji" id="modalEmoji"></div>
+    <div class="modal-title" id="modalTitle"></div>
+    <div class="modal-text" id="modalText"></div>
+    <button class="modal-close" onclick="closeModal()">Got it ✓</button>
+  </div>
+</div>
+
+<script>
+/* ---- LIVE VIEWER COUNTER ---- */
+let viewers = Math.floor(Math.random() * 8) + 1;
+const counterEl = document.getElementById('viewer-count');
+counterEl.textContent = viewers;
+setInterval(() => {
+  const delta = Math.random() < 0.6 ? 1 : (Math.random() < 0.3 ? -1 : 0);
+  viewers = Math.max(1, viewers + delta);
+  counterEl.textContent = viewers;
+}, 3000 + Math.random() * 2000);
+
+/* ---- GALLERY SLIDER ---- */
+const slideCounts = { track1: 6 };
+const slideIndexes = { track1: 0, track3: 0, track5: 0 };
+
+function initDots(trackId, dotsId, count) {
+  const container = document.getElementById(dotsId);
+  if (!container) return;
+  container.innerHTML = '';
+  for (let i = 0; i < count; i++) {
+    const d = document.createElement('span');
+    d.className = 'gallery-dot' + (i === 0 ? ' active' : '');
+    d.onclick = () => goToSlide(trackId, dotsId, i);
+    container.appendChild(d);
+  }
+}
+
+function goToSlide(trackId, dotsId, idx) {
+  const track = document.getElementById(trackId);
+  const slides = track.children;
+  const count = slides.length;
+  idx = (idx + count) % count;
+  slideIndexes[trackId] = idx;
+  track.style.transform = `translateX(-${idx * 100}%)`;
+  // Update dots
+  const dots = document.getElementById(dotsId);
+  if (dots) {
+    [...dots.children].forEach((d, i) => d.classList.toggle('active', i === idx));
+  }
+}
+
+function slide(trackId, dotsId, dir) {
+  const track = document.getElementById(trackId);
+  const count = track.children.length;
+  const current = slideIndexes[trackId] || 0;
+  goToSlide(trackId, dotsId, current + dir);
+}
+
+// Init all galleries
+document.addEventListener('DOMContentLoaded', () => {
+  initDots('track1', 'dots1', 6);
+  initDots('track3', 'dots3', 6);
+  initDots('track5', 'dots5', 12);
+});
+
+/* ---- LANGUAGE TOGGLE ---- */
+function toggleLang() {
+  const isHindi = document.getElementById('langToggle').checked;
+  document.getElementById('videoEN').classList.toggle('active', !isHindi);
+  document.getElementById('videoHI').classList.toggle('active', isHindi);
+}
+
+/* ---- SCENARIO CHOICES ---- */
+function showResult(showId, hideId) {
+  document.getElementById(showId).classList.add('show');
+  document.getElementById(hideId).classList.remove('show');
+}
+
+/* ---- POLL SUBMIT ---- */
+function submitPoll(pollId, thanksId) {
+  const poll = document.getElementById(pollId);
+  const selected = poll.querySelector('input:checked');
+  if (!selected) { alert('Please select an option first!'); return; }
+  poll.style.pointerEvents = 'none'; poll.style.opacity = '.6';
+  document.getElementById(thanksId).style.display = 'block';
+}
+
+/* ---- WORD CLOUD ---- */
+const colors = [
+  {txt:'#9B59B6',bg:'#f5f0ff'},{txt:'#2ECC71',bg:'#f0fff8'},
+  {txt:'#E74C3C',bg:'#fff5f5'},{txt:'#3498DB',bg:'#f0f8ff'},
+  {txt:'#FF7F50',bg:'#fff3ee'},{txt:'#e67e22',bg:'#fff8f0'},
+];
+function addToCloud() {
+  const input = document.getElementById('feelInput');
+  const word = input.value.trim();
+  if (!word) return;
+  const cloud = document.getElementById('wordCloud');
+  const span = document.createElement('span');
+  const c = colors[Math.floor(Math.random() * colors.length)];
+  const size = (.85 + Math.random() * .9).toFixed(2);
+  span.className = 'cloud-word';
+  span.style.cssText = `font-size:${size}rem;color:${c.txt};background:${c.bg};`;
+  span.textContent = word;
+  cloud.appendChild(span);
+  input.value = '';
+  input.focus();
+}
+document.getElementById('feelInput').addEventListener('keypress', e => {
+  if (e.key === 'Enter') addToCloud();
+});
+
+/* ---- MODAL ---- */
+function openModal(emoji, title, text) {
+  document.getElementById('modalEmoji').textContent = emoji;
+  document.getElementById('modalTitle').textContent = title;
+  document.getElementById('modalText').textContent = text;
+  document.getElementById('modal').classList.add('open');
+}
+function closeModal() {
+  document.getElementById('modal').classList.remove('open');
+}
+document.getElementById('modal').addEventListener('click', (e) => {
+  if (e.target === document.getElementById('modal')) closeModal();
+});
+
+/* ---- SCROLL REVEAL ---- */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+/* ---- TOUCH SWIPE FOR GALLERIES ---- */
+function addSwipe(trackId, dotsId) {
+  const track = document.getElementById(trackId);
+  if (!track) return;
+  const wrapper = track.parentElement;
+  let startX = 0;
+  wrapper.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+  wrapper.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - startX;
+    if (Math.abs(dx) > 40) slide(trackId, dotsId, dx < 0 ? 1 : -1);
+  });
+}
+addSwipe('track1', 'dots1');
+addSwipe('track3', 'dots3');
+addSwipe('track5', 'dots5');
+</script>
+</body>
+</html>
